@@ -1,6 +1,6 @@
-package view;
+package control;
 
-public class VCliente
+public class CCliente
 {
 	private short id;
 	private String nome;
@@ -8,10 +8,6 @@ public class VCliente
 	public short getId()
 	{
 		return id;
-	}
-	public void setId(short id)
-	{
-		this.id = id;
 	}
 	public String getNome()
 	{
