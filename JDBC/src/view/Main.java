@@ -3,7 +3,7 @@ package view;
 import java.sql.*;
 import java.util.Scanner;
 import control.CCliente;
-import control.COperacoesSQL;
+import control.CClienteDao;
 
 public class Main
 {
@@ -11,7 +11,7 @@ public class Main
 	{
 		CCliente cliente = new CCliente();
 		Scanner entrada = new Scanner(System.in);
-		COperacoesSQL db = new COperacoesSQL();
+		CClienteDao db = new CClienteDao();
 		
 		System.out.print("Digite o nome do cliente: ");
 		cliente.setNome(entrada.nextLine());
