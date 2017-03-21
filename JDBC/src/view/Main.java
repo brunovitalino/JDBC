@@ -21,14 +21,31 @@ public class Main
 			switch(op)
 			{
 				case 0:
-					System.out.println("Encerrando programa...");
+					System.out.println("ENCERRANDO PROGRAMA...");
 					break;
 				case 1:
-					clientes.listar();
+					System.out.println("PESQUISANDO CLIENTE");
+					System.out.println("Nome: ");
+					//clientes.pesquisar(entrada.nextLine());
 					break;
 				case 2:
-					System.out.println("Digite o nome do cliente: ");
+					System.out.println("ADICIONANDO NOVO CLIENTE");
+					System.out.println("Nome: ");
 					clientes.inserir(entrada.nextLine());				
+					break;
+				case 3:
+					System.out.println("ALTERANDO CLIENTE");
+					System.out.println("Nome: ");
+					clientes.inserir(entrada.nextLine());				
+					break;
+				case 4:
+					System.out.println("REMOVENDO CLIENTE");
+					System.out.println("Nome: ");
+					clientes.inserir(entrada.nextLine());				
+					break;
+				case 5:
+					System.out.println("LISTANDO CLIENTES");
+					clientes.listar();
 					break;
 				default:
 					System.out.println("Opcao invalida.\n");
