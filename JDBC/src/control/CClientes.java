@@ -3,16 +3,21 @@ package control;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.MClienteDao;
+import java.util.Iterator;
+import java.util.List;
+import model.MCliente;
+import model.MClientesDao;
 
-public class CClienteDao {
+public class CClientes
+{
 	
-	public void inserir(CCliente cliente) {
-		MClienteDao dao = null;		//Contem as operacoes SQL
+	public void inserir(String nome)
+	{
+		MClientesDao dao = null;		//Contem as operacoes SQL
 		boolean insercaoRealizada = false;	//Guarda resultado da insercao
 		
-		dao = new MClienteDao();
-		insercaoRealizada = dao.inserir(cliente.getNome());
+		dao = new MClientesDao();
+		insercaoRealizada = dao.inserir(nome);
 		if (insercaoRealizada)
 			System.out.println("Cliente cadastrado com sucesso!");
 		else
@@ -21,24 +26,26 @@ public class CClienteDao {
 		dao.close();
 	}
 	
-	public void listar() {
-		MClienteDao dao = new MClienteDao();	//Contem as operacoes SQL
-		ResultSet rs = null;
+	public void listar()
+	{
+		MClientesDao dao = new MClientesDao();	//Contem as operacoes SQL
+		List<MCliente> clientes = dao.listar();
+		MCliente cliente = new MCliente();
 		
-		rs = dao.listar();
-		
-		if (rs==null)
+		if (clientes==null)
 			System.out.println("Dados nulos.");
 		else
-			try {
-				while (rs.next()) {
-					System.out.println("ID:   " + rs.getString("id") + "\n" +
-									   "Nome: " + rs.getString("nome") + "\n");
+			if (clientes.isEmpty())
+				System.out.println("Não há dados à serem exibidos.\n");
+			else
+			{
+				Iterator<MCliente> itClientes = clientes.iterator();
+				while (itClientes.hasNext())
+				{
+					cliente = itClientes.next();
+					System.out.println("ID:   " + cliente.getId() + "\n" +
+									   "Nome: " + cliente.getNome() + "\n");
 				}
-				rs.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		dao.close();
 	}

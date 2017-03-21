@@ -2,7 +2,7 @@ package model;
 
 import java.sql.*;
 
-public class ConnectionFactory
+public class MConnectionFactory
 {
 	
 	public Connection getConnection()

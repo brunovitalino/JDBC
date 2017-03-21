@@ -5,13 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MClienteDao {
+public class MClientesDao
+{
 	private Connection conexao;
 	private PreparedStatement stmt;
 	
-	public MClienteDao() {
-		this.conexao = new ConnectionFactory().getConnection();
+	public MClientesDao() {
+		this.conexao = new MConnectionFactory().getConnection();
 	}
 	
 	//Nossa camada de controle usara para fechar a conexao
@@ -42,15 +45,28 @@ public class MClienteDao {
 		}
 	}
 	
-	public ResultSet listar() {
-		String comandoSql = "select * from Clientes";
+	public List<MCliente> listar() {
+		String comandoSql = "";
 		Statement st = null;
 		ResultSet rs = null;
+		MCliente cliente = null;
+		List<MCliente> clientes = new ArrayList<MCliente>();
+
+		System.out.println("PESQUISANDO NO BANCO");
+		comandoSql = "select * from Clientes";
 		
 		try {
 			st = conexao.createStatement();
 			rs = st.executeQuery(comandoSql);
-			return rs;
+			while (rs.next()) {
+				cliente = new MCliente();
+				cliente.setId(rs.getShort("id"));
+				cliente.setNome(rs.getString("nome"));
+				clientes.add(cliente);
+			}
+			st.close();
+			rs.close();
+			return clientes;
 		} catch (SQLException e) {
 			return null;
 		}
@@ -64,4 +80,5 @@ public class MClienteDao {
 			}*/
 		}
 	}
+	
 }

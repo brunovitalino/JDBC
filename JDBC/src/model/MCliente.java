@@ -1,6 +1,6 @@
-package control;
+package model;
 
-public class CCliente
+public class MCliente
 {
 	private short id;
 	private String nome;
@@ -8,6 +8,10 @@ public class CCliente
 	public short getId()
 	{
 		return id;
+	}
+	public void setId(short id)
+	{
+		this.id = id;
 	}
 	public String getNome()
 	{
@@ -17,4 +21,5 @@ public class CCliente
 	{
 		this.nome = nome;
 	}
+	
 }
