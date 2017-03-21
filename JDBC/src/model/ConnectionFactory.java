@@ -9,16 +9,16 @@ public class ConnectionFactory
 	{
 		try
 		{
-			System.out.println("Conectando database...");
+			System.out.print("Acesando database... ");
 			try { Thread.sleep(1000); } catch (Exception es) { es.printStackTrace(); }
 			Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost/jdbc", "root", "");
-			System.out.println("Database conectado!");
+			System.out.println("Online!\n");
 			try { Thread.sleep(1000); } catch (Exception es) { es.printStackTrace(); }
 			return conexao;
 		}
 		catch (SQLException e)
 		{
-			System.out.println("FALHA. Database desconectado!");
+			System.out.println("FALHA. Database offline.\n");
 			try { Thread.sleep(1000); } catch (Exception es) { es.printStackTrace(); }
 			throw new RuntimeException(e);
 		}

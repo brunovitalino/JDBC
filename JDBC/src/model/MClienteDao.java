@@ -1,9 +1,10 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class MClienteDao {
 	private Connection conexao;
@@ -17,16 +18,18 @@ public class MClienteDao {
 	public void close() {
 		try {
 			this.conexao.close();
-			System.out.println("Database desconectado.");
+			System.out.println("Database desconectado.\n");
 		} catch (SQLException e) {
-			System.out.println("Não há conexão à ser fechada.");
+			System.out.println("Não há conexão à ser fechada.\n");
 		}
 	}
 	
 	public boolean inserir(String nome) {
-		String comandoSQL = "insert into Clientes(nome)" +
-							"values (?)";
-		PreparedStatement pst;
+		String comandoSQL;
+		PreparedStatement pst = null;
+		
+		comandoSQL =	"insert into Clientes(nome)" +
+						"values (?);";
 		try {
 			pst = conexao.prepareStatement(comandoSQL);
 			pst.setString(1, nome);
@@ -35,8 +38,30 @@ public class MClienteDao {
 			return true;
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			return false;
 		}
-		return false;
+	}
+	
+	public ResultSet listar() {
+		String comandoSql = "select * from Clientes";
+		Statement st = null;
+		ResultSet rs = null;
+		
+		try {
+			st = conexao.createStatement();
+			rs = st.executeQuery(comandoSql);
+			return rs;
+		} catch (SQLException e) {
+			return null;
+		}
+		finally
+		{
+			/*try {
+				st.close();
+				rs.close();
+			} catch (SQLException e) {
+				System.out.println("Não foi possível liberar os recursos.\n");
+			}*/
+		}
 	}
 }
