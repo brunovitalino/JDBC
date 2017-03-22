@@ -10,7 +10,24 @@ import model.MClientesDao;
 
 public class CClientes
 {
-	
+
+	//PESQUISAR
+	public void pesquisar(String nome)
+	{
+		MClientesDao dao = new MClientesDao();
+		List<MCliente> clientes = dao.pesquisar(nome);
+		MCliente cliente = new MCliente();
+		
+		Iterator<MCliente> it = clientes.iterator();
+		while (it.hasNext())
+		{
+			cliente = it.next();
+			System.out.println("ID:   " + cliente.getId() + "\n" +
+							   "Nome: " + cliente.getNome() + "\n");
+		}
+		dao.close();
+	}
+	//CADASTRAR
 	public void inserir(String nome)
 	{
 		MClientesDao dao = null;		//Contem as operacoes SQL
@@ -25,7 +42,17 @@ public class CClientes
 		try { Thread.sleep(1000); } catch (Exception es) { es.printStackTrace(); }
 		dao.close();
 	}
-	
+	//ALTERAR
+	public void alterar()
+	{
+		
+	}
+	//REMOVER
+	public void remover()
+	{
+		
+	}
+	//LISTAR
 	public void listar()
 	{
 		MClientesDao dao = new MClientesDao();	//Contem as operacoes SQL

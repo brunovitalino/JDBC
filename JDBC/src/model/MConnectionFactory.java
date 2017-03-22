@@ -12,7 +12,7 @@ public class MConnectionFactory
 			System.out.print("Acesando database... ");
 			try { Thread.sleep(1000); } catch (Exception es) { es.printStackTrace(); }
 			Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost/jdbc", "root", "");
-			System.out.println("Online!\n");
+			System.out.println("conectado!\n");
 			try { Thread.sleep(1000); } catch (Exception es) { es.printStackTrace(); }
 			return conexao;
 		}
