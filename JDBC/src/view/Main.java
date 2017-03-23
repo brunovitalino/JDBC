@@ -39,8 +39,11 @@ public class Main
 					break;
 				case 3:
 					System.out.println("ALTERANDO CLIENTE\n");
-					System.out.print("Nome: ");
-					//clientes.alterar(entrada.nextLine());				
+					System.out.print("Digite o nome do cliente a ser alterado: ");
+					nome = entrada.nextLine();
+					System.out.print("Digite o novo nome: ");
+					String nomeNovo = entrada.nextLine();
+					clientes.alterar2(nome, nomeNovo);
 					break;
 				case 4:
 					System.out.println("REMOVENDO CLIENTE\n");

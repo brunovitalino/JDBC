@@ -18,10 +18,10 @@ public class CClientes
 		List<MCliente> clientes = dao.pesquisar(nome);
 		MCliente cliente = new MCliente();
 		
-		Iterator<MCliente> it = clientes.iterator();
-		while (it.hasNext())
+		Iterator<MCliente> itClientes = clientes.iterator();
+		while (itClientes.hasNext())
 		{
-			cliente = it.next();
+			cliente = itClientes.next();
 			System.out.println("ID:   " + cliente.getId() + "\n" +
 							   "Nome: " + cliente.getNome() + "\n");
 		}
@@ -36,15 +36,57 @@ public class CClientes
 		dao = new MClientesDao();
 		insercaoRealizada = dao.inserir(nome);
 		if (insercaoRealizada)
-			System.out.println("Cliente cadastrado com sucesso!");
+			System.out.println("Cadastramento de cliente realizado com sucesso!\n");
 		else
-			System.out.println("Falha na inserção!");
-		try { Thread.sleep(1000); } catch (Exception es) { es.printStackTrace(); }
+			System.out.println("Falha no cadastro!");
 		dao.close();
 	}
 	//ALTERAR
-	public void alterar()
+	public void alterar2(String nomeVelho, String nomeNovo)
 	{
+		MClientesDao dao = new MClientesDao();
+		MCliente cliente = new MCliente();
+		boolean nomeExistente = false, alteracaoRealizada = false;
+		
+		Iterator<MCliente> itClientes;
+		
+		itClientes= dao.pesquisar(nomeNovo).iterator();
+		while (itClientes.hasNext())
+		{
+			cliente = itClientes.next();
+			if (cliente.getNome().equals(nomeNovo))
+			{
+				nomeExistente = true;
+				break;
+			}
+		}
+		
+		if (nomeExistente)
+		{
+			System.out.println("Nome já existe! Falha na alteracao!\n");
+		}
+		else
+		{
+			alteracaoRealizada = dao.alterar(nomeVelho, nomeNovo);
+			if (alteracaoRealizada)
+			{				
+				itClientes= dao.pesquisar(nomeNovo).iterator();
+				while (itClientes.hasNext())
+				{
+					cliente = itClientes.next();
+					if (cliente.getNome().equals(nomeNovo))
+					{
+						//nomeExistente = true; 
+						System.out.println("Alteracao de cliente realizada com sucesso!\n");
+						break;
+					}
+				}
+			}
+			else
+			{
+				System.out.println("Nao foi possivel realizar! Falha na alteracao!\n");
+			}
+		}
 		
 	}
 	//REMOVER
@@ -60,7 +102,7 @@ public class CClientes
 		MCliente cliente = new MCliente();
 		
 		if (clientes==null)
-			System.out.println("Dados nulos.");
+			System.out.println("Dados nulos.\n");
 		else
 			if (clientes.isEmpty())
 				System.out.println("Não há dados à serem exibidos.\n");
