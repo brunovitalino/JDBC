@@ -75,9 +75,10 @@ public class MClientesDao
 		{
 			pst = conexao.prepareStatement(comandoSQL);
 			pst.setString(1, nome);
+			boolean resposta = true;
 			pst.execute();
 			pst.close();
-			return true;
+			return resposta;
 		}
 		catch (SQLException e)
 		{
@@ -85,8 +86,36 @@ public class MClientesDao
 		}
 	}
 	//ALTERAR
-	public void alterar()
+	public boolean alterar(String nomeVelho, String nomeNovo)
 	{
+		String comandoSQL = "";
+		PreparedStatement pst = null;
+		Statement st = null;
+		
+		comandoSQL =	"update clientes set nome=? where nome=?";
+		try
+		{			
+			pst = conexao.prepareStatement(comandoSQL);
+			pst.setString(1, nomeNovo);
+			pst.setString(2, nomeVelho);
+			boolean resposta = true;
+			pst.execute();
+			pst.close();
+			return resposta;
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		/*finally
+		{
+			try {
+				pst.close();
+			} catch (SQLException e) {
+				System.out.println("Não foi possível liberar os recursos.\n");
+			}
+		}*/
 		
 	}
 	//REMOVER
@@ -124,15 +153,15 @@ public class MClientesDao
 		{
 			return null;
 		}
-		finally
+		/*finally
 		{
-			/*try {
+			try {
 				st.close();
 				rs.close();
 			} catch (SQLException e) {
 				System.out.println("Não foi possível liberar os recursos.\n");
-			}*/
-		}
+			}
+		}*/
 	}
 	
 }
