@@ -76,7 +76,7 @@ public class CClientes
 					cliente = itClientes.next();
 					if (cliente.getNome().equals(nomeNovo))
 					{
-						//nomeExistente = true;
+						//nomeExistente = true; 
 						System.out.println("Alteracao de cliente realizada com sucesso!\n");
 						break;
 					}
