@@ -8,14 +8,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MClientesDao
+public class ClienteDao
 {
 	private Connection conexao;
-	private PreparedStatement stmt;
 	
-	public MClientesDao()
+	public ClienteDao()
 	{
-		this.conexao = new MConnectionFactory().getConnection();
+		this.conexao = new ConnectionFactory().getConnectionSqlServer();
 	}
 	
 	//Nossa camada de controle usara para fechar a conexao
@@ -32,15 +31,15 @@ public class MClientesDao
 		}
 	}	
 	//PESQUISAR
-	public List<MCliente> pesquisar(String nome)
+	public List<Cliente> pesquisar(String nome)
 	{
 		String comandoSQL = "";
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		MCliente cliente = null;
-		List<MCliente> clientes = new ArrayList<MCliente>();
+		Cliente cliente = null;
+		List<Cliente> clientes = new ArrayList<Cliente>();
 		
-		comandoSQL =	"SELECT * FROM clientes " +
+		comandoSQL =	"SELECT * FROM cliente " +
 						"WHERE nome like ?";		
 		try
 		{
@@ -49,7 +48,7 @@ public class MClientesDao
 			rs = pst.executeQuery();
 			while (rs.next())
 			{
-				cliente = new MCliente();
+				cliente = new Cliente();
 				cliente.setId(rs.getShort("id"));
 				cliente.setNome(rs.getString("nome"));
 				clientes.add(cliente);
@@ -69,7 +68,7 @@ public class MClientesDao
 		String comandoSQL;
 		PreparedStatement pst = null;
 		
-		comandoSQL =	"INSERT INTO Clientes(nome) " +
+		comandoSQL =	"INSERT INTO cliente(nome) " +
 						"VALUES (?);";
 		try
 		{
@@ -92,7 +91,7 @@ public class MClientesDao
 		PreparedStatement pst = null;
 		Statement st = null;
 		
-		comandoSQL =	"update clientes set nome=? where nome=?";
+		comandoSQL =	"update cliente set nome=? where nome=?";
 		try
 		{			
 			pst = conexao.prepareStatement(comandoSQL);
@@ -124,15 +123,15 @@ public class MClientesDao
 		
 	}
 	//LISTAR
-	public List<MCliente> listar()
+	public List<Cliente> listar()
 	{
 		String comandoSql = "";
 		Statement st = null;
 		ResultSet rs = null;
-		MCliente cliente = null;
-		List<MCliente> clientes = new ArrayList<MCliente>();
+		Cliente cliente = null;
+		List<Cliente> clientes = new ArrayList<Cliente>();
 
-		comandoSql = "SELECT * FROM Clientes";
+		comandoSql = "SELECT * FROM cliente";
 		
 		try
 		{
@@ -140,7 +139,7 @@ public class MClientesDao
 			rs = st.executeQuery(comandoSql);
 			while (rs.next())
 			{
-				cliente = new MCliente();
+				cliente = new Cliente();
 				cliente.setId(rs.getShort("id"));
 				cliente.setNome(rs.getString("nome"));
 				clientes.add(cliente);

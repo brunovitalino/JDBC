@@ -1,8 +1,8 @@
 package view;
 
-import java.sql.*;
 import java.util.Scanner;
-import control.CClientes;
+
+import control.ClienteController;
 
 public class Main
 {
@@ -11,7 +11,7 @@ public class Main
 	{
 		String nome = "";
 		Scanner entrada = new Scanner(System.in);
-		CClientes clientes = new CClientes();
+		ClienteController clientes = new ClienteController();
 		int op = 0;
 		
 
@@ -26,6 +26,7 @@ public class Main
 			{
 				case 0:
 					System.out.println("ENCERRANDO PROGRAMA...\n");
+					entrada.close();
 					break;
 				case 1:
 					System.out.println("PESQUISANDO CLIENTE\n");

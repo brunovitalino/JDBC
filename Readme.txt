@@ -8,9 +8,10 @@ JRE:
 
 SGBD:
  mySQL
+ MS SQL Server
 
 Database:
  Nome
   jdbc
  Tabela usada
-  Clientes (id, nome)
+  Cliente (id, nome)

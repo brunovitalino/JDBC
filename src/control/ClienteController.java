@@ -1,24 +1,22 @@
 package control;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
-import model.MCliente;
-import model.MClientesDao;
 
-public class CClientes
+import model.Cliente;
+import model.ClienteDao;
+
+public class ClienteController
 {
 
 	//PESQUISAR
 	public void pesquisar(String nome)
 	{
-		MClientesDao dao = new MClientesDao();
-		List<MCliente> clientes = dao.pesquisar(nome);
-		MCliente cliente = new MCliente();
+		ClienteDao dao = new ClienteDao();
+		List<Cliente> clientes = dao.pesquisar(nome);
+		Cliente cliente = new Cliente();
 		
-		Iterator<MCliente> itClientes = clientes.iterator();
+		Iterator<Cliente> itClientes = clientes.iterator();
 		while (itClientes.hasNext())
 		{
 			cliente = itClientes.next();
@@ -30,10 +28,10 @@ public class CClientes
 	//CADASTRAR
 	public void inserir(String nome)
 	{
-		MClientesDao dao = null;		//Contem as operacoes SQL
+		ClienteDao dao = null;		//Contem as operacoes SQL
 		boolean insercaoRealizada = false;	//Guarda resultado da insercao
 		
-		dao = new MClientesDao();
+		dao = new ClienteDao();
 		insercaoRealizada = dao.inserir(nome);
 		if (insercaoRealizada)
 			System.out.println("Cadastramento de cliente realizado com sucesso!\n");
@@ -44,11 +42,11 @@ public class CClientes
 	//ALTERAR
 	public void alterar2(String nomeVelho, String nomeNovo)
 	{
-		MClientesDao dao = new MClientesDao();
-		MCliente cliente = new MCliente();
+		ClienteDao dao = new ClienteDao();
+		Cliente cliente = new Cliente();
 		boolean nomeExistente = false, alteracaoRealizada = false;
 		
-		Iterator<MCliente> itClientes;
+		Iterator<Cliente> itClientes;
 		
 		itClientes= dao.pesquisar(nomeNovo).iterator();
 		while (itClientes.hasNext())
@@ -97,9 +95,9 @@ public class CClientes
 	//LISTAR
 	public void listar()
 	{
-		MClientesDao dao = new MClientesDao();	//Contem as operacoes SQL
-		List<MCliente> clientes = dao.listar();
-		MCliente cliente = new MCliente();
+		ClienteDao dao = new ClienteDao();	//Contem as operacoes SQL
+		List<Cliente> clientes = dao.listar();
+		Cliente cliente = new Cliente();
 		
 		if (clientes==null)
 			System.out.println("Dados nulos.\n");
@@ -108,7 +106,7 @@ public class CClientes
 				System.out.println("Não há dados à serem exibidos.\n");
 			else
 			{
-				Iterator<MCliente> itClientes = clientes.iterator();
+				Iterator<Cliente> itClientes = clientes.iterator();
 				while (itClientes.hasNext())
 				{
 					cliente = itClientes.next();

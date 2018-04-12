@@ -1,6 +1,6 @@
 package model;
 
-public class MCliente
+public class Cliente
 {
 	private short id;
 	private String nome;
